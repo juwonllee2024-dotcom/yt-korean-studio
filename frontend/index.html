@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YT Korean Studio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">LOCAL VIDEO WORKSHOP</p>
+        <h1>한국어 자막 스튜디오</h1>
+        <p class="lede">영상과 영어 자막을 넣으면, 내 컴퓨터의 하이브리드 로컬 모델로 한국어 자막을 만들고 MP4를 렌더링합니다. 빠른 전용 모델이 전체를 번역하고, 애매한 문장만 선택한 Ollama 모델이 검토합니다.</p>
+      </header>
+
+      <section class="panel" aria-labelledby="input-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / INPUT</p>
+            <h2 id="input-title">촬영 파일 준비</h2>
+          </div>
+          <span class="local-badge">외부 API 키 없음</span>
+        </div>
+
+        <form id="job-form">
+          <div class="file-grid">
+            <label class="file-card" for="video-input">
+              <span class="file-number">A</span>
+              <span class="file-title">원본 영상</span>
+              <span class="file-help">MP4 권장 · 파일 모드</span>
+              <input id="video-input" name="video" type="file" accept="video/mp4,video/quicktime,video/x-matroska,video/webm">
+              <span class="file-name" data-file-name="video-input">선택된 파일 없음</span>
+            </label>
+            <label class="file-card" for="subtitle-input">
+              <span class="file-number">B</span>
+              <span class="file-title">영어 자막</span>
+              <span class="file-help">SRT 또는 VTT · MVP 필수</span>
+              <input id="subtitle-input" name="subtitle" type="file" accept=".srt,.vtt,text/vtt,application/x-subrip">
+              <span class="file-name" data-file-name="subtitle-input">선택된 파일 없음</span>
+            </label>
+            <label class="file-card" for="intro-input">
+              <span class="file-number">C</span>
+              <span class="file-title">내 인트로</span>
+              <span class="file-help">선택 · 앞에 붙일 영상</span>
+              <input id="intro-input" name="intro" type="file" accept="video/mp4,video/quicktime,video/x-matroska,video/webm">
+              <span class="file-name" data-file-name="intro-input">선택된 파일 없음</span>
+            </label>
+          </div>
+
+          <div class="url-source">
+            <div class="url-label-row">
+              <label class="url-label" for="youtube-url">또는 YouTube 영상 링크</label>
+              <span class="source-badge">링크 모드</span>
+            </div>
+            <input
+              id="youtube-url"
+              name="youtube_url"
+              class="url-input"
+              type="url"
+              inputmode="url"
+              autocomplete="off"
+              placeholder="https://www.youtube.com/watch?v=..."
+            >
+            <p class="url-help">파일 업로드 대신 사용합니다. 재생목록은 지원하지 않으며, 영어 자막이 있는 영상만 처리할 수 있습니다.</p>
+            <label class="check-row" for="rights-confirmed">
+              <input id="rights-confirmed" name="rights_confirmed" type="checkbox">
+              <span>이 영상의 사용 권리를 확인했습니다.</span>
+            </label>
+          </div>
+
+          <div class="controls-row">
+            <label class="model-field" for="model-input">
+              <span>로컬 번역 모델</span>
+              <select id="model-input" name="model">
+                <option value="">모델 목록 불러오는 중…</option>
+              </select>
+              <span class="model-help">하이브리드 모드: 빠른 영어→한국어 번역 + 애매한 문장만 Ollama 검토</span>
+            </label>
+            <button id="create-button" class="primary-button" type="submit" disabled>Create Video</button>
+          </div>
+
+          <p class="rights-note"><strong>검토 안내:</strong> 자막 번역은 원본 영상의 사용 권리를 만들지 않습니다. 권리와 사실관계를 확인한 뒤 결과물을 사용하세요.</p>
+        </form>
+      </section>
+
+      <section id="progress-card" class="panel progress-panel" aria-labelledby="progress-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / PIPELINE</p>
+            <h2 id="progress-title">작업 진행</h2>
+          </div>
+          <span id="status-pill" class="status-pill">대기 중</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+        <div class="progress-meta"><span id="stage-label">준비 중</span><span id="progress-label">0%</span></div>
+        <p id="error-message" class="error-message" role="alert" hidden></p>
+        <div id="file-links" class="file-links" aria-live="polite"></div>
+        <button id="cancel-button" class="secondary-button" type="button">작업 취소</button>
+      </section>
+
+      <footer class="footer-note">생성 파일은 이 컴퓨터의 작업 폴더에만 저장됩니다.</footer>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
