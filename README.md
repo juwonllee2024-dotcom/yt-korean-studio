@@ -1,3 +1,37 @@
+<!-- JUWON-PORTFOLIO-INTRO:START -->
+# YT Korean Studio
+
+![YT Korean Studio — portfolio visual](docs/portfolio-preview.jpg)
+
+*Recorded subtitle-studio UI preview; translation models and backend not connected; video processing not exercised.*
+
+*기존 자막 스튜디오 UI · 번역 모델·백엔드 미연결 · 영상 작업 미실행*
+
+## English
+
+A Windows-local video subtitle studio accepting MP4 files or supported YouTube URLs, translating English subtitle cues locally, and rendering Korean captions with FFmpeg. Model availability, source subtitles, and reuse rights remain prerequisites.
+
+[View JUWON's portfolio](https://jupt.pages.dev/) · [Browse the project collection](https://jupt.pages.dev/projects)
+
+**Scope:** This README presents the repository's documented intent and recorded visual evidence. It does not certify that every feature is complete, deployed, or currently working. Follow the original setup, safety, and license documentation below.
+
+This repository is a selected original-source snapshot. The recorded source fingerprint describes the initial publication; this portfolio introduction was added afterward. Original technical documentation is preserved below.
+
+## 한국어
+
+영상 입력·유튜브 다운로드·한국어 자막·최종 출력·QA를 다루는 웹앱.
+
+[JUWON 포트폴리오 보기](https://jupt.pages.dev/) · [전체 프로젝트 보기](https://jupt.pages.dev/projects)
+
+**확인 범위:** 저장소의 문서상 목적과 기록된 화면 근거를 소개합니다. 모든 기능의 완성·배포·현재 정상 작동을 보증하지 않습니다. 설치법·안전 주의사항·라이선스는 아래 기존 문서를 확인하세요.
+
+선택된 원본 소스의 공개 스냅샷입니다. 기록된 소스 지문은 최초 공개 시점을 나타내며, 이 포트폴리오 소개는 이후 추가했습니다. 기존 기술 문서는 아래에 보존했습니다.
+<!-- JUWON-PORTFOLIO-INTRO:END -->
+
+---
+
+## Original documentation / 기존 문서
+
 # YT-Korean-Studio
 
 Windows-local video subtitle studio. Select a source MP4 or a single HTTPS YouTube video URL, provide English subtitles when using a local file, and optionally add an intro. The default hybrid path translates with a local CPU-optimized model, then sends only suspicious cues to a locally installed Ollama model for review. FFmpeg burns Korean subtitles and the app produces a final MP4. No paid runtime API is required.
